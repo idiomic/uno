@@ -17,6 +17,7 @@ type Response struct {
 func setupRoutes(e *echo.Echo) {
 	e.GET("/newgame", newGame)
 	e.GET("/update/:game/:username", update)
+	e.GET("/games", listGames)
 	e.POST("/startgame/:game/:username", startGame)
 	e.POST("/login/:game/:username", login)
 	e.POST("/play/:game/:username/:number/:color", play)
@@ -31,6 +32,11 @@ func newGame(c echo.Context) error {
 func login(c echo.Context) error {
 	validGame := joinGame(c.Param("game"), c.Param("username"))
 	return respondIfValid(c, validGame)
+}
+
+func listGames(c echo.Context) error {
+	games := getGames()
+	return c.JSONPretty(http.StatusOK, games, "  ")
 }
 
 func startGame(c echo.Context) error {

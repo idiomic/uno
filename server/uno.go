@@ -12,6 +12,14 @@ type Card struct {
 	Color  string `json:"color"`
 }
 
+type Game struct {
+	Name        string
+	NumPlayers  uint32
+	MaxPlayers  uint32
+	HasStarted  bool
+	HasPassword bool
+}
+
 ////////////////////////////////////////////////////////////
 // Utility functions used in place of firebase
 ////////////////////////////////////////////////////////////
@@ -162,4 +170,15 @@ func checkForWinner() string {
 		}
 	}
 	return ""
+}
+
+// TODO: This function will need to query the DB for the server list.
+// For now, just return a dummy list of what we think we will need
+func getGames() []Game {
+	games := []Game{}
+
+	games = append(games, Game{"Game1", 1, 10, false, false})
+	games = append(games, Game{"Game2", 10, 10, true, true})
+
+	return games
 }

@@ -23,5 +23,9 @@ export default {
 
     drawCard(gameId, userName) {
         return BaseService.post(`/draw/${gameId}/${userName}`);
+    },
+
+    getGameList() {
+        return BaseService.get(`/games`);
     }
 }

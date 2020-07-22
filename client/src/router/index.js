@@ -21,6 +21,12 @@ const routes = [
     // This is what you should always do except for '/' => 'Home'
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
     props: true
+  },
+  {
+    path: '/lobby',
+    name: 'Lobby',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Lobby.vue'),
+    props: true
   }
 ]
 

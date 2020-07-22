@@ -47,8 +47,7 @@ export default {
         let res = await unoService.login(this.game_id, this.user_name);
         if (res.data.valid) {
           this.to = {
-            name: "About",
-            params: { game_id: this.game_id, valid: res.data.valid, username: this.user_name}
+            name: "Lobby"
           };
         }
       } else {
