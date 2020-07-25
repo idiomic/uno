@@ -3,22 +3,22 @@
     <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
-          <v-col cols="12" sm="8" md="4">
+          <v-col>
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Game List</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-tooltip bottom></v-tooltip>
               </v-toolbar>
-              <ul id="game-list">
-                <li v-for="game in game_list" :key="game.Name">
-                  {{ game.Name }}
-                  {{ game.NumPlayers }}
-                  {{ game.MaxPlayers }}
-                  {{ game.HasStarted }}
-                  {{ game.HasPassword }}
-                </li>
-              </ul>
+              <v-data-table
+                :headers="headers"
+                :items="game_list"
+                :items-per-page="5"
+              >
+                <template v-slot:item.HasPassword="{ item }">
+                  <v-icon v-if="item.HasPassword">mdi-lock</v-icon>
+                </template>
+              </v-data-table>
             </v-card>
           </v-col>
         </v-row>
@@ -33,7 +33,29 @@ export default {
   name: "Lobby",
   data: () => {
     return {
-      game_list: "",
+      headers: [
+        {
+          text: "Game ID",
+          value: "Name"
+        },
+        {
+          text: "Cur Players",
+          value: "NumPlayers"
+        },
+        {
+          text: "Max Players",
+          value: "MaxPlayers"
+        },
+        {
+          text: "In Progress",
+          value: "HasStarted"
+        },
+        {
+          text: "Password",
+          value: "HasPassword"
+        },
+      ],
+      game_list: [],
       sim: true // Only true while debugging
     };
   },
